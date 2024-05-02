@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
         // "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,
+        Authorization: `Bearer ${typeof window !== "undefined" && localStorage.getItem("accessToken") || ""}`,
     },
 })
 
