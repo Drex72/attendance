@@ -36,7 +36,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     if (dataFetching) return <PageLoader />
 
     return (
-        <AuthentcationGuard type="protected">
+        // <AuthentcationGuard type="protected">
             <main className="relative flex h-screen bg-white">
                 <NitdaLogo width={120} height={50} className="absolute left-5 top-5" />
 
@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                     </main>
                 </div>
             </main>
-        </AuthentcationGuard>
+        // </AuthentcationGuard>
     )
 }
 

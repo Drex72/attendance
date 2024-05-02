@@ -35,7 +35,7 @@ class AuthService {
      * @returns {Promise<IBaseApiResponse<IUser>>} - The API response with user data.
      */
     public async signin(data: ILoginRequest) {
-        return await axios.post<IBaseApiResponse<IUser>>(`${this.authUrl}/sign-in`, data, { withCredentials: true })
+        return await axios.post<IBaseApiResponse<IUser>>(`${this.authUrl}/sign-in`, data)
     }
 
     /**

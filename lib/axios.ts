@@ -3,9 +3,20 @@ import { makeToast } from "@/lib/react-toast"
 import { authSlice, store } from "@/state_management"
 import axios from "axios"
 
+let token: string | null = ""
+
+if (typeof window !== "undefined") {
+    token = localStorage.getItem("accessToken") || ""
+
+    console.log(token)
+}
+
 const axiosInstance = axios.create({
     baseURL: API_URL,
-    withCredentials: true,
+    headers: {
+        // "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,
+    },
 })
 
 let retries = 3

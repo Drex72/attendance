@@ -21,6 +21,7 @@ export const useFileUpload = () => {
             }
 
             setImageUrl(reader.result as string)
+            console.log(file)
             setImageFile(file)
         }
 

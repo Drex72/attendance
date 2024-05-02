@@ -3,15 +3,24 @@ import { IApiHookBaseResponse, IBaseApiResponse } from "@/services/types"
 import { ILoginRequest, IUser } from "../auth.interface"
 import { authService } from "../auth.service"
 
-export const useLoginApi: () => IApiHookBaseResponse<ILoginRequest, IUser> = () => {
-    const loginRequest = useApi<IBaseApiResponse<IUser>, ILoginRequest>((data: ILoginRequest) => {
+export const useLoginApi: () => IApiHookBaseResponse<
+    ILoginRequest,
+    { user: IUser; tokens: { accessToken: string; refreshToken: string } }
+> = () => {
+    const loginRequest = useApi<
+        IBaseApiResponse<{ user: IUser; tokens: { accessToken: string; refreshToken: string } }>,
+        ILoginRequest
+    >((data: ILoginRequest) => {
         return authService.signin(data)
     })
 
     const handleLogin = async (loginDetails: ILoginRequest) => {
         loginRequest.reset()
 
-        return (await loginRequest.request(loginDetails)) as IBaseApiResponse<IUser>
+        return (await loginRequest.request(loginDetails)) as IBaseApiResponse<{
+            user: IUser
+            tokens: { accessToken: string; refreshToken: string }
+        }>
     }
 
     return {

@@ -118,7 +118,7 @@ const Form = () => {
             <div className=" mx-auto mt-12 w-[50%] rounded-lg bg-white shadow-lg  ">
                 <div
                     style={{
-                        background: `url(${event.photo})`,
+                        background: `url(${event?.photo ?? "https://res.cloudinary.com/dinrq1kf4/image/upload/c_fill,g_center,h_1000,w_1000/c_fit,h_500,l_Nithub:NITPROFILE_ASSETS:IMAGE%2022-8769646304,r_10000,w_500,x_20,y_20/co_red,l_text:Cookie_10_bold:Teledua,x_40,y_40/v1/Nithub/nitprofile_profile_frames/FRAME%20119-5069537755"})`,
                         backgroundSize: "cover",
                     }}
                     className="h-[250px] w-full rounded-md"
@@ -127,9 +127,9 @@ const Form = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className=" mt-7 flex flex-col gap-4 px-16">
                     <div className="space-y-6 py-8">
                         <div className="mb-4 ">
-                            <h1 className="mb-3 text-[28px] font-semibold capitalize text-[#101928]">{event.name}</h1>
+                            <h1 className="mb-3 text-[28px] font-semibold capitalize text-[#101928]">{event?.name ?? "Event 101"}</h1>
 
-                            <p className="text-sm text-[#667185] dark:text-gray-400">{event.description}</p>
+                            <p className="text-sm text-[#667185] dark:text-gray-400">{event?.description ?? "A Major Event"}</p>
                         </div>
 
                         <div className="flex flex-col gap-7">
@@ -189,7 +189,7 @@ const Form = () => {
 
                             <Button
                                 variant="contained"
-                                label="Log into Account"
+                                label="RSVP"
                                 type="submit"
                                 className=" md:w-[200px]"
                             />

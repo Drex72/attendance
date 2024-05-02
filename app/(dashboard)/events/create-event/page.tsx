@@ -5,10 +5,13 @@ import { TimeInput } from "@/components/form/Input/TimeInput"
 import { Button } from "@/components/ui/Button"
 import { useFileUpload } from "@/hooks/useFileUpload"
 import { makeToast } from "@/lib/react-toast"
+import { useCreateEvent } from "@/services/events/event-hooks"
+import { useAppDispatch } from "@/state_management"
+import { eventsSlice } from "@/state_management/slices/eventsSlice"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaCloudUploadAlt } from "react-icons/fa"
 import { MdDeleteOutline } from "react-icons/md"
@@ -17,8 +20,8 @@ import { z } from "zod"
 const schema = z.object({
     name: z.string(),
     description: z.string(),
-    limit: z.number().optional(),
-    date: z.date(),
+    limit: z.string().optional(),
+    date: z.string(),
     time: z.string(),
     location: z.string(),
 })
@@ -27,28 +30,64 @@ type schemaType = z.infer<typeof schema>
 const CreateEvent = () => {
     const router = useRouter()
 
+    const dispatch = useAppDispatch()
+
+    const { addEvent } = eventsSlice.actions
+
+    const { handler, loading } = useCreateEvent()
+
     const {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm<schemaType>({
         resolver: zodResolver(schema),
     })
 
-    const { handleImageUpload, handleImageDelete, imageFile, imageUrl } = useFileUpload()
+    const { handleImageUpload, handleImageDelete, imageUrl } = useFileUpload()
+
+    const [imageFile, setImageFile] = useState<File | null>(null)
 
     const fileUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
 
         if (!files) return
 
+        setImageFile(files[0])
+
         handleImageUpload(files[0])
     }
 
     const onSubmit = async (data: schemaType) => {
-        // const response = await handler(data)
+        const formData = new FormData()
+        const { name, description, limit, date, time, location } = data
 
-        // if (!response || !response.data) return
+        if (!imageFile) {
+            return makeToast({
+                type: "error",
+                message: "Please Upload Image",
+                id: "upload-image-error",
+            })
+        }
+
+        formData.append("name", name)
+        formData.append("description", description)
+        formData.append("date", "2024-02-21")
+        formData.append("time", "12:00 PM")
+        formData.append("coverPhoto", imageFile!)
+
+        if (limit) {
+            formData.append("limit", limit.toString())
+        }
+
+        const response = await handler(formData)
+
+        if (!response || !response.data) return
+
+        dispatch(addEvent(response.data))
+
+        reset()
 
         makeToast({
             id: "Event-success",
@@ -80,6 +119,7 @@ const CreateEvent = () => {
                         name="name"
                         register={register}
                         placeholder="Event 101"
+                        disabled={loading}
                         error={errors?.name ? errors.name.message : undefined}
                     />
 
@@ -88,6 +128,7 @@ const CreateEvent = () => {
                         label="DESCRIPTION"
                         name="description"
                         register={register}
+                        disabled={loading}
                         placeholder="Enter Event Description"
                         error={errors?.description ? errors.description.message : undefined}
                     />
@@ -98,6 +139,7 @@ const CreateEvent = () => {
                             label="DATE"
                             name="date"
                             register={register}
+                            disabled={loading}
                             error={errors?.date ? errors.date.message : undefined}
                         />
 
@@ -106,6 +148,7 @@ const CreateEvent = () => {
                             label="TIME"
                             name="time"
                             register={register}
+                            disabled={loading}
                             error={errors?.time ? errors.time.message : undefined}
                         />
                     </div>
@@ -114,6 +157,7 @@ const CreateEvent = () => {
                         label="LOCATION"
                         name="location"
                         register={register}
+                        disabled={loading}
                         placeholder="NITDA IT HUB, Lagos Akoka"
                         error={errors?.location ? errors.location.message : undefined}
                     />
@@ -123,6 +167,7 @@ const CreateEvent = () => {
                         label="LIMIT"
                         name="limit"
                         register={register}
+                        disabled={loading}
                         placeholder="9"
                         error={errors?.limit ? errors.limit.message : undefined}
                     />
@@ -165,7 +210,7 @@ const CreateEvent = () => {
                     )}
 
                     <div className="mt-7 flex justify-end">
-                        <Button variant="contained" type="submit" label="Create Event" />
+                        <Button variant="contained" type="submit" label="Create Event" loading={loading} />
                     </div>
                 </div>
             </form>

@@ -48,9 +48,11 @@ const Login = () => {
             type: "success",
         })
 
-        dispatch(login(response.data))
+        dispatch(login(response.data.user))
 
-        router.push("/")
+        localStorage.setItem("accessToken", response.data.tokens.accessToken)
+
+        router.push("/events")
     }
 
     return (
