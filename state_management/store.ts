@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 import { appSlice } from "./slices"
 import { authSlice } from "./slices/authSlice"
+import { eventsSlice } from "./slices/eventsSlice"
 
 /**
  * Configuration object for persisting Redux state using redux-persist.
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     appSlice: appSlice.reducer,
     authSlice: authSlice.reducer,
+    eventsSlice: eventsSlice.reducer,
 
 })
 

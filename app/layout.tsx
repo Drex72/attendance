@@ -1,9 +1,9 @@
 import { CustomProvider } from "@/utils"
 import type { Metadata } from "next"
-import { Spline_Sans } from "next/font/google"
+import { Montserrat } from "next/font/google"
 import "../styles/globals.css"
 
-const splineSans = Spline_Sans({ subsets: ["latin"] })
+const montserrat = Montserrat({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
     title: {
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={splineSans.className}>
+            <body >
                 <CustomProvider>{children}</CustomProvider>
             </body>
         </html>

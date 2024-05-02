@@ -1,13 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Avenir:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.cdnfonts.com/css/garbata-trial");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
     font-size: 16px;
+    font-family: "Avenir", sans-serif;
 }
 
 button {
     font-family: inherit;
+}
+
+.custom-event-heading {
+    font-family: "Garbata Trial", sans-serif;
+  
 }
 
 body {
@@ -62,21 +71,43 @@ body {
     }
 }
 
-
-
 @-webkit-keyframes spinner-wave-after {
-	from { -webkit-transform: scale(0.5,0.5); opacity: 0; }
-	to { -webkit-transform: scale(1,1); opacity: 1; }
+    from {
+        -webkit-transform: scale(0.5, 0.5);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        opacity: 1;
+    }
 }
 @keyframes spinner-wave-after {
-	from { transform: scale(0.5,0.5); opacity: 0; }
-	to { transform: scale(1,1); opacity: 1; }
+    from {
+        transform: scale(0.5, 0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
 }
 @-webkit-keyframes spinner-wave-before {
-	from { -webkit-transform: scale(1,1); opacity: 1; }
-	to { -webkit-transform: scale(1.5,1.5); opacity: 0; }
+    from {
+        -webkit-transform: scale(1, 1);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: scale(1.5, 1.5);
+        opacity: 0;
+    }
 }
 @keyframes spinner-wave-before {
-	from { -webkit-transform: scale(1,1); opacity: 1; }
-	to { -webkit-transform: scale(1.5,1.5); opacity: 0; }
+    from {
+        -webkit-transform: scale(1, 1);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: scale(1.5, 1.5);
+        opacity: 0;
+    }
 }
