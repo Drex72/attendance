@@ -30,7 +30,7 @@ const SideBar = () => {
         <div className="my-5 min-h-[500px] w-[80px] rounded-2xl bg-[#F9F9F9] py-4">
             <ul className="list-none flex-col space-y-6 text-center">
                 <SidebarItem name="Events" link="events" icon={<EventsIcon link="events" />} />
-                <SidebarItem name="Admins" link="/admins" icon={<VisitorsIcon link="/admins" />} />
+                <SidebarItem name="Admins" link="admins" icon={<VisitorsIcon link="admins" />} />
             </ul>
         </div>
     )

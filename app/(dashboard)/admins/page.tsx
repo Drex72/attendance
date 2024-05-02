@@ -1,9 +1,11 @@
-import React from 'react'
+import InternsTable from "@/components/ui/DataTable/InternsTable"
 
 const Hello = () => {
-  return (
-    <div>Hello</div>
-  )
+    return (
+        <div>
+            <InternsTable />
+        </div>
+    )
 }
 
 export default Hello
