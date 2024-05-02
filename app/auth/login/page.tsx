@@ -40,6 +40,8 @@ const Login = () => {
     const onSubmit = async (data: schemaType) => {
         const response = await handler(data)
 
+        console.log(response)
+
         if (!response || !response.data) return
 
         makeToast({
