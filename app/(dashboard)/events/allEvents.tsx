@@ -16,10 +16,32 @@ export function AllEvents() {
     const { events } = useAppSelector((state) => state.eventsSlice)
     const router = useRouter()
 
+    function isFutureOrPast(dateString: string): string {
+        // Parse the date string
+        const date = new Date(dateString);
+      
+        // Get the current date
+        const currentDate = new Date();
+      
+        // Compare the date with the current date
+        if (date >= currentDate) {
+          return "Upcoming";
+        } else if (date < currentDate) {
+          return "Past";
+        } else {
+          return "Current";
+        }
+      }
+
     const filterEvents = () => {
+
+        const upcomingEvents =  events.filter(event => isFutureOrPast(event.date)  === 'Upcoming');
+
+        const pastEvents = events.filter(event => isFutureOrPast(event.date)  === 'Past');
+
         return {
-            upcomingEvents: events,
-            pastEvents: events,
+            upcomingEvents: upcomingEvents,
+            pastEvents: pastEvents,
         }
     }
 

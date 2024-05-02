@@ -18,10 +18,11 @@ export function EventCard({ tag, event }: IEventsCard) {
                 <div className="py-8">
                     <div className="mobile_lg:justify-start flex gap-6">
                         <div className="mobile_lg:w-[150px] mobile_lg:h-[150px]">
-                            <Image
+                            <img
                                 src={event?.photo ?? getAsset("events-img.png", "images")}
-                                width={68}
-                                height={66}
+                                // width={68}
+                                // height={66}
+                                className="w-[60px] h-[60px]"
                                 alt="event image"
                             />
                         </div>
