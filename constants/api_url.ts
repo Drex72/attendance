@@ -1,2 +1,2 @@
-export const API_URL ="https://user-management-system-backend-1.onrender.com/api/v1"
+export const API_URL ="http://localhost:4000/api/v1"
 

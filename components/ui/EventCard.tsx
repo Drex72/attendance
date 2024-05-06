@@ -1,7 +1,6 @@
 import CalendarIcon from "@/public/icons/CalendarIcon"
 import { Event } from "@/services/events/events.interface"
 import { getAsset } from "@/utils"
-import Image from "next/image"
 import { BiTargetLock } from "react-icons/bi"
 import { FaRegClock } from "react-icons/fa"
 import { FaEllipsis } from "react-icons/fa6"
@@ -13,7 +12,7 @@ interface IEventsCard {
 export function EventCard({ tag, event }: IEventsCard) {
     console.log(event)
     return (
-        <article className="border-grayNithub my-8 rounded-lg border">
+        <article className="border-grayNithub my-8 rounded-lg border bg-[#cedcef]">
             <div className="mobile_lg:flex-col flex justify-between px-5">
                 <div className="py-8">
                     <div className="mobile_lg:justify-start flex gap-6">
@@ -32,6 +31,9 @@ export function EventCard({ tag, event }: IEventsCard) {
                             <p className="mobile_lg:text-[14px] opacity-60">
                                 {event?.description ??
                                     " We are excited to have you join us and look forward to an engaging and insightful experience."}
+                            </p>
+                            <p className="mobile_lg:text-[14px] opacity-60">
+                                {event?.id }
                             </p>
                         </div>
                         <div className="mobile_lg:flex hidden">

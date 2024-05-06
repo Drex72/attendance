@@ -73,7 +73,7 @@ const CreateEvent = () => {
 
         formData.append("name", name)
         formData.append("description", description)
-        formData.append("date", "2024-02-21")
+        formData.append("date", "2024-11-21")
         formData.append("time", "12:00 PM")
         formData.append("coverPhoto", imageFile!)
 
